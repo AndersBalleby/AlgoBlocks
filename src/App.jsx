@@ -1,9 +1,11 @@
-function App() {
+import BlocklyWorkspace from "./BlocklyWorkspace"
+
+export default function App() {
   return (
     <>
-    <p>Hello world!</p>
+      <div className="flex w-full max-w-[100vw] h-[calc(100vh-100px)]">
+        <BlocklyWorkspace />
+      </div>
     </>
   )
 }
-
-export default App
