@@ -30,22 +30,9 @@ export default function BlocklyWorkspace({ toolbox }) {
     }
 
     return () => {
-      if (workspace.current) {
-        workspace.current.dispose();
-        workspace.current = null;
-      }
-    };
-  }, [toolbox]);
-
-  return (
-    <div 
-      id="blocklyWorkspace" 
-      ref={blocklyDiv}
-      style={{ 
-        flex: 1, 
-        height: '100%',
-        minWidth: '600px'
-      }}
-    />
-  );
+      workspaceRef.current?.dispose();
+    }
+  }, [])
+  
+  return <div ref={blocklyDiv} className="basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"/>
 }
