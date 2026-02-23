@@ -48,7 +48,7 @@ body {
   border-right: 1px solid #e8ecf4;
 }
 
-#pseudocodeContent {
+.pseudocodeContent {
   background: #0f172a;
   color: #e2e8f0;
   padding: 1.1rem 1.25rem;
@@ -218,3 +218,20 @@ body {
   border-top: 1px solid #f1f5f9;
   margin-top: 0;
 }
+
+/* Til pseudocode */
+.ps-keyword {
+  color: #a78bfa;
+  font-weight: 700;
+} /* soft violet */
+.ps-variable {
+  color: #7dd3fc;
+} /* sky blue    */
+.ps-number {
+  color: #fb923c;
+  font-weight: 600;
+} /* amber       */
+.ps-string {
+  color: #34d399;
+  font-style: italic;
+} /* emerald     */

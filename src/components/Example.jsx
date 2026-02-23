@@ -9,7 +9,7 @@ export default function Example({ index, array, target, output, explanation }) {
     >
       {/* Header */}
       <div
-        className="px-4 py-2 font-semibold text-sm border-b"
+        className="px-4 py-2 font-extrabold text-sm border-b"
         style={{
           backgroundColor: "#f9fafb",
           borderColor: "#e5e7eb",

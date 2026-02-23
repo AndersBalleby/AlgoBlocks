@@ -18,7 +18,7 @@ export default function TestCaseTab() {
       <section className="problem-section">
         <h3>Test Cases</h3>
         <div className="mb-3">
-          <div className="flex flex-col gap-[5px] mb-3" id="testPreviewList">
+          <div className="flex flex-col gap-1.25 mb-3" id="testPreviewList">
             {testCases.map((testCase, index) => {
               return (
                 <TestCase
@@ -51,22 +51,22 @@ export default function TestCaseTab() {
               >
                 Test Case #{selectedTestCase + 1}
               </div>
-              <div className="mb-1">
+              <div className="mb-1 text-sm">
                 <span style={{ color: "#64748b" }}>Søg efter: </span>
                 <span style={{ color: "#6366f1", fontWeight: "bold" }}>
                   {testCases[selectedTestCase].target}
                 </span>
               </div>
-              <div className="mb-1">
+              <div className="mb-1 text-sm">
                 <span style={{ color: "#64748b" }}>Liste: </span>
                 <span style={{ color: "#6366f1", fontWeight: "bold" }}>
                   [{testCases[selectedTestCase].array.join(", ")}]
                 </span>
               </div>
-              <div>
+              <div className="text-sm">
                 <span style={{ color: "#64748b" }}>Forventet resultat: </span>
                 <span style={{ color: "#6366f1", fontWeight: "bold" }}>
-                  {`indeks ${testCases[selectedTestCase].expected}`}
+                  {testCases[selectedTestCase].expected}
                 </span>
               </div>
             </div>

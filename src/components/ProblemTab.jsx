@@ -1,5 +1,6 @@
 import Example from "./Example";
 import Code from "./Code";
+import PseudoSection from "./PseudoSection";
 
 export default function ProblemTab() {
   const examples = [
@@ -9,9 +10,9 @@ export default function ProblemTab() {
       output: 1,
       explanation: (
         <>
-          I programmering tæller vi fra<Code>0</Code>. Vi leder efter tallet
-          <Code>7</Code> som ligger ved<Code>indeks 1</Code>i listen. Derfor er
-          svaret<Code>1</Code>.
+          I programmering tæller vi fra 0. Vi leder efter tallet
+          7 som ligger ved indeks 1 i listen. Derfor er
+          svaret 1.
         </>
       ),
     },
@@ -21,8 +22,8 @@ export default function ProblemTab() {
       output: -1,
       explanation: (
         <>
-          Vi leder efter tallet<Code>500</Code>. Vi kan se, at<Code>500</Code>{" "}
-          er ikke i listen. Derfor er svaret<Code>-1</Code>.
+          Vi leder efter tallet 500. Vi kan se, at 500
+          er ikke i listen. Derfor er svaret -1.
         </>
       ),
     },
@@ -32,7 +33,7 @@ export default function ProblemTab() {
     <>
       <section className="problem-section">
         <h3>Algoritme: Lineær Søgning</h3>
-        <div className="section-box">
+        <div className="section-box mb-2">
           <p>
             Implementer algoritmen
             <Code>Lineær Søgning</Code> Gennemgå
@@ -47,7 +48,7 @@ export default function ProblemTab() {
 
       <section className="problem-section">
         <h3>Pseudokode</h3>
-        <div id="pseudocodeContent">TODO: Opsæt pseudocode</div>
+          <PseudoSection />
       </section>
 
       <section className="problem-section">
