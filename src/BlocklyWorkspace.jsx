@@ -1,12 +1,8 @@
 import { useEffect, useRef } from 'react';
 import * as Blockly from 'blockly';
-import { javascriptGenerator } from 'blockly/javascript';
-import { blocks as customBlocks } from './blocks';
-import { forBlock as customGenerators } from './generator';
-
 // Register blocks outside component (only once)
-Blockly.common.defineBlocks(customBlocks);
-Object.assign(javascriptGenerator.forBlock, customGenerators);
+//Blockly.common.defineBlocks(customBlocks);
+//Object.assign(javascriptGenerator.forBlock, customGenerators);
 
 export default function BlocklyWorkspace({ toolbox }) {
   const blocklyDiv = useRef(null);
@@ -30,9 +26,17 @@ export default function BlocklyWorkspace({ toolbox }) {
     }
 
     return () => {
-      workspaceRef.current?.dispose();
-    }
-  }, [])
-  
-  return <div ref={blocklyDiv} className="basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"/>
+      if (workspace.current) {
+        workspace.current.dispose();
+        workspace.current = null;
+      }
+    };
+  }, [toolbox]);
+
+  return (
+    <div  
+      ref={blocklyDiv}
+      className='basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden'
+    />
+  );
 }
