@@ -25,6 +25,8 @@ export default function BlocklyWorkspace({ toolbox }) {
       });
     }
 
+    /* TODO: Tilføj saveWorkspace og loadWorkspace */
+
     return () => {
       if (workspace.current) {
         workspace.current.dispose();

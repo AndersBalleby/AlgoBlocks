@@ -58,7 +58,6 @@ body {
   font-size: 0.82rem;
   line-height: 1.9;
 
-  /* FIX: prevent overflow */
   white-space: pre-wrap;
   word-break: break-word;
   overflow-x: auto;
@@ -85,7 +84,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
-
 
 #leftTabs {
   display: flex;
@@ -119,8 +117,6 @@ body {
   border-bottom: 2px solid #667eea;
   background: #ffffff;
 }
-
-/* ===== TAB CONTENT SCROLL AREA ===== */
 
 #tabContent {
   flex: 1;
@@ -179,13 +175,12 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #6366f1; /* indigo accent instead of muted grey */
+  color: #6366f1;
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
 
-/* Decorative left bar on each header */
 .problem-section h3::before,
 .solution-section h3::before {
   content: "";
@@ -196,8 +191,6 @@ body {
   border-radius: 2px;
   flex-shrink: 0;
 }
-
-/* ===== 3. CONTENT BOXES — wrap section body in a card ===== */
 
 .section-box {
   background: none;
