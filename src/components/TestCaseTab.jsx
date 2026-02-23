@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TestCase from "./TestCase";
 
-export default function TestCaseTab() {
+export default function TestCaseTab({ isRunning, onRun, onReset }) {
   const [selectedTestCase, setSelectedTestCase] = useState(null);
 
   /* Linear Search test cases */
-  const testCases = [
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 18, expected: 3 },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 3, expected: 0 },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 45, expected: 6 },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 99, expected: -1 },
-    { array: [5], target: 5, expected: 0 },
-  ];
+  const [testCases, setTestCases] = useState([
+    { array: [3, 7, 12, 18, 23, 31, 45], target: 18, expected: 3, status: "default" },
+    { array: [3, 7, 12, 18, 23, 31, 45], target: 3, expected: 0, status: "default" },
+    { array: [3, 7, 12, 18, 23, 31, 45], target: 45, expected: 6, status: "default" },
+    { array: [3, 7, 12, 18, 23, 31, 45], target: 99, expected: -1, status: "default" },
+    { array: [5], target: 5, expected: 0, status: "default" },
+  ]);
+
+  /* For at afprøve test cases */
+  /* Det evaluerer ingen kode endnu :) */
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    if(isRunning) {
+      const runTests = async () => {
+        for(let i = 0; i < testCases.length; ++i) {
+          await sleep(600);
+          setTestCases((prev) => prev.map((tc, index) => index === i ? {...tc, status: "pass"} : tc));
+        }
+        onReset();
+      };
+      runTests();
+    } else {
+      setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
+    }
+  }, [isRunning]);
 
   return (
     <>
@@ -27,7 +46,7 @@ export default function TestCaseTab() {
                   array={testCase.array}
                   target={testCase.target}
                   expected={testCase.expected}
-                  status={"default"}
+                  status={testCase.status}
                   isActive={selectedTestCase === index}
                   onClick={() => setSelectedTestCase(index)}
                 />
@@ -73,8 +92,8 @@ export default function TestCaseTab() {
           )}
         </div>
         <div id="testCaseButtons">
-          <button className="action-btn run-btn">Kør Algoritme</button>
-          <button className="action-btn reset-btn">Nulstil</button>
+          <button className={`action-btn run-btn ${isRunning ? "btn-loading" : ""}`} onClick={onRun} disabled={isRunning}>{isRunning ? "Kører..." : "Kør Algoritme"}</button>
+          <button className="action-btn reset-btn" onClick={onReset}>Nulstil</button>
         </div>
       </section>
     </>

@@ -6,6 +6,16 @@ import ProblemTab from "./components/ProblemTab";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
+  const [isRunning, setIsRunning] = useState(false);
+
+  function handleRun() {
+    setActiveTab("solutionTab");
+    setIsRunning(true);
+  }
+
+  function handleReset() {
+    setIsRunning(false);
+  }
 
   return (
     <>
@@ -13,8 +23,8 @@ export default function App() {
         <div id="header">
           <h1>Workshop | Algoritmer</h1>
           <div id="headerButtons">
-            <button className="action-btn run-btn">Kør Algoritme</button>
-            <button className="action-btn reset-btn">Nulstil</button>
+            <button className="action-btn run-btn" onClick={handleRun}>Kør Algoritme</button>
+            <button className="action-btn reset-btn" onClick={handleReset}>Nulstil</button>
           </div>
         </div>
 
@@ -49,7 +59,7 @@ export default function App() {
                 className={`tab-panel ${activeTab === "solutionTab" ? "active" : ""}`}
                 id="solutionTab"
               >
-                <TestCaseTab />
+                <TestCaseTab isRunning={isRunning} onRun={handleRun} onReset={handleReset} />
               </div>
             </div>
           </div>

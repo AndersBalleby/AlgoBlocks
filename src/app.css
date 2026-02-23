@@ -283,3 +283,27 @@ body {
 .reset-btn:hover {
   background-color: #cbd5e1;
 }
+
+.run-btn.btn-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.run-btn.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
