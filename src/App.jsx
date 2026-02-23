@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BlocklyWorkspace from "./BlocklyWorkspace";
+import BlocklyWorkspace from "./components/BlocklyWorkspace";
 import "./app.css";
 import TestCaseTab from "./components/TestCaseTab";
 import ProblemTab from "./components/ProblemTab";
@@ -12,6 +12,10 @@ export default function App() {
       <body>
         <div id="header">
           <h1>Workshop | Algoritmer</h1>
+          <div id="headerButtons">
+            <button className="action-btn run-btn">Kør Algoritme</button>
+            <button className="action-btn reset-btn">Nulstil</button>
+          </div>
         </div>
 
         <div id="pageContainer">

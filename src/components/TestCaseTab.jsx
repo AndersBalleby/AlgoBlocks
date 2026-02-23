@@ -72,6 +72,10 @@ export default function TestCaseTab() {
             </div>
           )}
         </div>
+        <div id="testCaseButtons">
+          <button className="action-btn run-btn">Kør Algoritme</button>
+          <button className="action-btn reset-btn">Nulstil</button>
+        </div>
       </section>
     </>
   );
