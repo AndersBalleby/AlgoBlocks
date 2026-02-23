@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import * as Blockly from 'blockly';
+import { useEffect, useRef } from "react";
+import * as Blockly from "blockly";
 // Register blocks outside component (only once)
 //Blockly.common.defineBlocks(customBlocks);
 //Object.assign(javascriptGenerator.forBlock, customGenerators);
@@ -20,8 +20,8 @@ export default function BlocklyWorkspace({ toolbox }) {
           startScale: 1.0,
           maxScale: 3,
           minScale: 0.3,
-          scaleSpeed: 1.2
-        }
+          scaleSpeed: 1.2,
+        },
       });
     }
 
@@ -36,9 +36,9 @@ export default function BlocklyWorkspace({ toolbox }) {
   }, [toolbox]);
 
   return (
-    <div  
+    <div
       ref={blocklyDiv}
-      className='basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden'
+      className="basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
     />
   );
 }
