@@ -52,15 +52,15 @@ export default function TestCaseTab() {
                 Test Case #{selectedTestCase + 1}
               </div>
               <div className="mb-1">
-                <span style={{ color: "#64748b" }}>Liste: </span>
-                <span style={{ color: "#6366f1", fontWeight: "bold" }}>
-                  [{testCases[selectedTestCase].array.join(", ")}]
-                </span>
-              </div>
-              <div className="mb-1">
                 <span style={{ color: "#64748b" }}>Søg efter: </span>
                 <span style={{ color: "#6366f1", fontWeight: "bold" }}>
                   {testCases[selectedTestCase].target}
+                </span>
+              </div>
+              <div className="mb-1">
+                <span style={{ color: "#64748b" }}>Liste: </span>
+                <span style={{ color: "#6366f1", fontWeight: "bold" }}>
+                  [{testCases[selectedTestCase].array.join(", ")}]
                 </span>
               </div>
               <div>

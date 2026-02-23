@@ -1,9 +1,8 @@
 import { useState } from "react";
 import BlocklyWorkspace from "./BlocklyWorkspace";
 import "./app.css";
-import TestCase from "./components/TestCase";
 import TestCaseTab from "./components/TestCaseTab";
-import DescriptionTab from "./components/ProblemTab";
+import ProblemTab from "./components/ProblemTab";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
@@ -39,7 +38,7 @@ export default function App() {
                 className={`tab-panel ${activeTab === "problemTab" ? "active" : ""}`}
                 id="problemTab"
               >
-                <DescriptionTab />
+                <ProblemTab />
               </div>
 
               <div
