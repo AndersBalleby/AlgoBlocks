@@ -27,5 +27,5 @@ export default function BlocklyWorkspace({ toolbox }) {
     }
   }, [])
   
-  return <div ref={blocklyDiv} className="w-full h-full" />
+  return <div ref={blocklyDiv} className="basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"/>
 }
