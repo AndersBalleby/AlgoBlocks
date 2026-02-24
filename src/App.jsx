@@ -11,7 +11,9 @@ export default function App() {
   const [generatedCode, setGeneratedCode] = useState(null);
 
   function handleRun() {
-    setActiveTab("solutionTab");
+    if (generatedCode) {
+      setActiveTab("solutionTab");
+    }
     setIsRunning(true);
   }
 
@@ -76,6 +78,7 @@ export default function App() {
               >
                 <TestCaseTab
                   isRunning={isRunning}
+                  generatedCode={generatedCode}
                   onRun={handleRun}
                   onReset={handleReset}
                   onFinished={onFinished}
@@ -87,6 +90,7 @@ export default function App() {
           <BlocklyWorkspace
             toolbox={linearSearchToolbox}
             isRunning={isRunning}
+            setIsRunning={setIsRunning}
             onRun={handleCodeGenerated}
           />
         </div>

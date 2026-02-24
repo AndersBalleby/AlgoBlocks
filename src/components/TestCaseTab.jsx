@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import TestCase from "./TestCase";
 
-export default function TestCaseTab({ isRunning, onRun, onReset, onFinished }) {
+export default function TestCaseTab({
+  isRunning,
+  generatedCode,
+  onRun,
+  onReset,
+  onFinished,
+}) {
   const [selectedTestCase, setSelectedTestCase] = useState(null);
 
   /* Linear Search test cases */
@@ -38,11 +44,11 @@ export default function TestCaseTab({ isRunning, onRun, onReset, onFinished }) {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning && generatedCode) {
       setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
 
       const runTests = async () => {
-        const code = isRunning;
+        const code = generatedCode;
 
         for (let i = 0; i < testCases.length; ++i) {
           const { array, target, expected } = testCases[i];
@@ -70,7 +76,7 @@ export default function TestCaseTab({ isRunning, onRun, onReset, onFinished }) {
       };
       runTests();
     }
-  }, [isRunning]);
+  }, [isRunning, generatedCode]);
 
   return (
     <>

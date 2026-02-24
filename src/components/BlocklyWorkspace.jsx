@@ -3,7 +3,12 @@ import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
 
-export default function BlocklyWorkspace({ toolbox, isRunning, onRun }) {
+export default function BlocklyWorkspace({
+  toolbox,
+  isRunning,
+  setIsRunning,
+  onRun,
+}) {
   const blocklyDiv = useRef(null);
   const workspace = useRef(null);
 
@@ -41,7 +46,7 @@ export default function BlocklyWorkspace({ toolbox, isRunning, onRun }) {
     if (isRunning) {
       if (workspace.current.getAllBlocks().length === 0) {
         alert("Du skal placere blokke før du kan afprøve din kode");
-        return;
+        setIsRunning(false);
       }
       const code = javascriptGenerator.workspaceToCode(workspace.current);
       onRun(code);
