@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
-// Register blocks outside component (only once)
-//Blockly.common.defineBlocks(customBlocks);
+import { blocks } from "../blocks/blocks";
+
+Blockly.common.defineBlocks(blocks);
 //Object.assign(javascriptGenerator.forBlock, customGenerators);
 
 export default function BlocklyWorkspace({ toolbox }) {
@@ -12,8 +13,11 @@ export default function BlocklyWorkspace({ toolbox }) {
     if (blocklyDiv.current && !workspace.current) {
       workspace.current = Blockly.inject(blocklyDiv.current, {
         toolbox: toolbox,
-        scrollbars: true,
+        scrollbars: false,
         trashcan: true,
+        move: {
+          scrollbars: false,
+        },
         zoom: {
           controls: true,
           wheel: true,
@@ -38,7 +42,7 @@ export default function BlocklyWorkspace({ toolbox }) {
   return (
     <div
       ref={blocklyDiv}
-      className="basis-full h-full min-w-[600px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+      className="basis-full h-full min-w-150 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
     />
   );
 }

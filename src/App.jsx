@@ -3,6 +3,7 @@ import BlocklyWorkspace from "./components/BlocklyWorkspace";
 import "./app.css";
 import TestCaseTab from "./components/TestCaseTab";
 import ProblemTab from "./components/ProblemTab";
+import { linearSearchToolbox } from "./toolbox";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
@@ -23,8 +24,12 @@ export default function App() {
         <div id="header">
           <h1>Workshop | Algoritmer</h1>
           <div id="headerButtons">
-            <button className="action-btn run-btn" onClick={handleRun}>Kør Algoritme</button>
-            <button className="action-btn reset-btn" onClick={handleReset}>Nulstil</button>
+            <button className="action-btn run-btn" onClick={handleRun}>
+              Kør Algoritme
+            </button>
+            <button className="action-btn reset-btn" onClick={handleReset}>
+              Nulstil
+            </button>
           </div>
         </div>
 
@@ -59,12 +64,16 @@ export default function App() {
                 className={`tab-panel ${activeTab === "solutionTab" ? "active" : ""}`}
                 id="solutionTab"
               >
-                <TestCaseTab isRunning={isRunning} onRun={handleRun} onReset={handleReset} />
+                <TestCaseTab
+                  isRunning={isRunning}
+                  onRun={handleRun}
+                  onReset={handleReset}
+                />
               </div>
             </div>
           </div>
 
-          <BlocklyWorkspace />
+          <BlocklyWorkspace toolbox={linearSearchToolbox} />
         </div>
       </body>
     </>

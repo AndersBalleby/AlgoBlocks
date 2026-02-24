@@ -305,5 +305,20 @@ body {
 }
 
 @keyframes spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Fjern scrollbars fra Blockly */
+.blocklyScrollbarVertical,
+.blocklyScrollbarHorizontal {
+  visibility: hidden !important;
+  display: none !important;
+}
+
+.blocklyScrollbarBackground,
+.blocklyScrollbarHandle {
+  visibility: hidden !important;
+  display: none !important;
 }
