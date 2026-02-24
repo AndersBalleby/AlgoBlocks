@@ -1,5 +1,5 @@
 const logic_compare = {
-  type: "logic_compare",
+  type: "cb_logic_compare",
   message0: "%1 %2 %3",
   args0: [
     {
@@ -31,7 +31,7 @@ const logic_compare = {
 };
 
 const logic_operation = {
-  type: "logic_operation",
+  type: "cb_logic_operation",
   message0: "%1 %2 %3",
   args0: [
     {
@@ -61,7 +61,7 @@ const logic_operation = {
 };
 
 const logic_boolean = {
-  type: "logic_boolean",
+  type: "cb_logic_boolean",
   message0: "%1",
   args0: [
     {
@@ -80,7 +80,7 @@ const logic_boolean = {
 };
 
 const logic_negate = {
-  type: "logic_negate",
+  type: "cb_logic_negate",
   message0: "ikke %1",
   args0: [{ type: "input_value", name: "BOOL", check: "Boolean" }],
   output: "Boolean",
@@ -90,7 +90,7 @@ const logic_negate = {
 };
 
 const logic_null = {
-  type: "logic_null",
+  type: "cb_logic_null",
   message0: "null",
   output: null,
   colour: 210,

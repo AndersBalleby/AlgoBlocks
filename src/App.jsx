@@ -8,6 +8,7 @@ import { linearSearchToolbox } from "./toolbox";
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
   const [isRunning, setIsRunning] = useState(false);
+  const [generatedCode, setGeneratedCode] = useState(null);
 
   function handleRun() {
     setActiveTab("solutionTab");
@@ -15,6 +16,15 @@ export default function App() {
   }
 
   function handleReset() {
+    setIsRunning(false);
+    setGeneratedCode(null);
+  }
+
+  function handleCodeGenerated(code) {
+    setGeneratedCode(code);
+  }
+
+  function onFinished() {
     setIsRunning(false);
   }
 
@@ -68,12 +78,17 @@ export default function App() {
                   isRunning={isRunning}
                   onRun={handleRun}
                   onReset={handleReset}
+                  onFinished={onFinished}
                 />
               </div>
             </div>
           </div>
 
-          <BlocklyWorkspace toolbox={linearSearchToolbox} />
+          <BlocklyWorkspace
+            toolbox={linearSearchToolbox}
+            isRunning={isRunning}
+            onRun={handleCodeGenerated}
+          />
         </div>
       </body>
     </>

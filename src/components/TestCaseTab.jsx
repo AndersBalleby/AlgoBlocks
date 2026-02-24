@@ -1,15 +1,35 @@
 import { useEffect, useState } from "react";
 import TestCase from "./TestCase";
 
-export default function TestCaseTab({ isRunning, onRun, onReset }) {
+export default function TestCaseTab({ isRunning, onRun, onReset, onFinished }) {
   const [selectedTestCase, setSelectedTestCase] = useState(null);
 
   /* Linear Search test cases */
   const [testCases, setTestCases] = useState([
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 18, expected: 3, status: "default" },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 3, expected: 0, status: "default" },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 45, expected: 6, status: "default" },
-    { array: [3, 7, 12, 18, 23, 31, 45], target: 99, expected: -1, status: "default" },
+    {
+      array: [3, 7, 12, 18, 23, 31, 45],
+      target: 18,
+      expected: 3,
+      status: "default",
+    },
+    {
+      array: [3, 7, 12, 18, 23, 31, 45],
+      target: 3,
+      expected: 0,
+      status: "default",
+    },
+    {
+      array: [3, 7, 12, 18, 23, 31, 45],
+      target: 45,
+      expected: 6,
+      status: "default",
+    },
+    {
+      array: [3, 7, 12, 18, 23, 31, 45],
+      target: 99,
+      expected: -1,
+      status: "default",
+    },
     { array: [5], target: 5, expected: 0, status: "default" },
   ]);
 
@@ -18,17 +38,37 @@ export default function TestCaseTab({ isRunning, onRun, onReset }) {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    if(isRunning) {
+    if (isRunning) {
+      setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
+
       const runTests = async () => {
-        for(let i = 0; i < testCases.length; ++i) {
+        const code = isRunning;
+
+        for (let i = 0; i < testCases.length; ++i) {
+          const { array, target, expected } = testCases[i];
+
+          let result;
+          try {
+            const wrapped = `
+              ${code}
+              linearSøgning([${array}], ${target});
+            `;
+            result = eval(wrapped);
+          } catch (e) {
+            result = null;
+          }
+
+          const status = result === expected ? "pass" : "fail";
+
+          setTestCases((prev) =>
+            prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
+          );
+
           await sleep(600);
-          setTestCases((prev) => prev.map((tc, index) => index === i ? {...tc, status: "pass"} : tc));
         }
-        onReset();
+        onFinished();
       };
       runTests();
-    } else {
-      setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
     }
   }, [isRunning]);
 
@@ -55,7 +95,7 @@ export default function TestCaseTab({ isRunning, onRun, onReset }) {
           </div>
         </div>
         <div
-          className="p-4 bg-slate-50 border border-slate-200 rounded-lg font-mono text-[0.82rem] min-h-[80px] transition-all duration-200 mt-1"
+          className="p-4 bg-slate-50 border border-slate-200 rounded-lg font-mono text-[0.82rem] min-h-20 transition-all duration-200 mt-1"
           id="testDetailPanel"
         >
           {selectedTestCase === null ? (
@@ -92,8 +132,16 @@ export default function TestCaseTab({ isRunning, onRun, onReset }) {
           )}
         </div>
         <div id="testCaseButtons">
-          <button className={`action-btn run-btn ${isRunning ? "btn-loading" : ""}`} onClick={onRun} disabled={isRunning}>{isRunning ? "Kører..." : "Kør Algoritme"}</button>
-          <button className="action-btn reset-btn" onClick={onReset}>Nulstil</button>
+          <button
+            className={`action-btn run-btn ${isRunning ? "btn-loading" : ""}`}
+            onClick={onRun}
+            disabled={isRunning}
+          >
+            {isRunning ? "Kører..." : "Kør Algoritme"}
+          </button>
+          <button className="action-btn reset-btn" onClick={onReset}>
+            Nulstil
+          </button>
         </div>
       </section>
     </>

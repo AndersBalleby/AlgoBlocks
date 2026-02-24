@@ -1,11 +1,9 @@
+import "../blocks/logic/logic_generator";
 import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
-import { blocks } from "../blocks/blocks";
+import { javascriptGenerator } from "blockly/javascript";
 
-Blockly.common.defineBlocks(blocks);
-//Object.assign(javascriptGenerator.forBlock, customGenerators);
-
-export default function BlocklyWorkspace({ toolbox }) {
+export default function BlocklyWorkspace({ toolbox, isRunning, onRun }) {
   const blocklyDiv = useRef(null);
   const workspace = useRef(null);
 
@@ -38,6 +36,17 @@ export default function BlocklyWorkspace({ toolbox }) {
       }
     };
   }, [toolbox]);
+
+  useEffect(() => {
+    if (isRunning) {
+      if (workspace.current.getAllBlocks().length === 0) {
+        alert("Du skal placere blokke før du kan afprøve din kode");
+        return;
+      }
+      const code = javascriptGenerator.workspaceToCode(workspace.current);
+      onRun(code);
+    }
+  }, [isRunning]);
 
   return (
     <div

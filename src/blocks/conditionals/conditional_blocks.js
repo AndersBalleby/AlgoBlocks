@@ -1,5 +1,5 @@
 const controls_if = {
-  type: "controls_if",
+  type: "cb_controls_if",
   message0: "hvis %1 %2",
   args0: [
     { type: "input_value", name: "IF0", check: "Boolean" },
@@ -13,7 +13,7 @@ const controls_if = {
 };
 
 const controls_ifelse = {
-  type: "controls_ifelse",
+  type: "cb_controls_ifelse",
   message0: "hvis %1 %2 ellers %3",
   args0: [
     { type: "input_value", name: "IF0", check: "Boolean" },

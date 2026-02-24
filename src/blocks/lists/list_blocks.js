@@ -1,5 +1,5 @@
 const lists_create_empty = {
-  type: "lists_create_empty",
+  type: "cb_lists_create_empty",
   message0: "tom liste",
   output: "Array",
   colour: 260,
@@ -8,7 +8,7 @@ const lists_create_empty = {
 };
 
 const lists_create_with = {
-  type: "lists_create_with",
+  type: "cb_lists_create_with",
   message0: "liste med %1 %2 %3",
   args0: [
     { type: "input_value", name: "ADD0" },
@@ -23,7 +23,7 @@ const lists_create_with = {
 };
 
 const lists_length = {
-  type: "lists_length",
+  type: "cb_lists_length",
   message0: "længde af %1",
   args0: [{ type: "input_value", name: "VALUE", check: "Array" }],
   output: "Number",
@@ -33,7 +33,7 @@ const lists_length = {
 };
 
 const lists_getIndex = {
-  type: "lists_getIndex",
+  type: "cb_lists_getIndex",
   message0: "få element ved indeks %1 fra listen %2",
   args0: [
     { type: "input_value", name: "AT", check: "Number" },
@@ -47,7 +47,7 @@ const lists_getIndex = {
 };
 
 const lists_setIndex = {
-  type: "lists_setIndex",
+  type: "cb_lists_setIndex",
   message0: "sæt værdi ved indeks %1 fra %2 til %3",
   args0: [
     { type: "input_value", name: "AT", check: "Number" },
@@ -63,7 +63,7 @@ const lists_setIndex = {
 };
 
 const lists_isEmpty = {
-  type: "lists_isEmpty",
+  type: "cb_lists_isEmpty",
   message0: "%1 er tom",
   args0: [{ type: "input_value", name: "VALUE", check: "Array" }],
   output: "Boolean",
@@ -73,7 +73,7 @@ const lists_isEmpty = {
 };
 
 const lists_indexOf = {
-  type: "lists_indexOf",
+  type: "cb_lists_indexOf",
   message0: "find %1 i listen %2",
   args0: [
     { type: "input_value", name: "FIND" },

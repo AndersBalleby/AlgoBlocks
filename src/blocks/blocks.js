@@ -19,5 +19,5 @@ const blockData = [
   ...function_data,
 ];
 
-export const blocks =
-  Blockly.common.createBlockDefinitionsFromJsonArray(blockData);
+const blocks = Blockly.common.createBlockDefinitionsFromJsonArray(blockData);
+Blockly.common.defineBlocks(blocks);

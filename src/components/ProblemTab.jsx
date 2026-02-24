@@ -10,9 +10,8 @@ export default function ProblemTab() {
       output: 1,
       explanation: (
         <>
-          I programmering tæller vi fra 0. Vi leder efter tallet
-          7 som ligger ved indeks 1 i listen. Derfor er
-          svaret 1.
+          I programmering tæller vi fra 0. Vi leder efter tallet 7 som ligger
+          ved indeks 1 i listen. Derfor er svaret 1.
         </>
       ),
     },
@@ -22,8 +21,8 @@ export default function ProblemTab() {
       output: -1,
       explanation: (
         <>
-          Vi leder efter tallet 500. Vi kan se, at 500
-          er ikke i listen. Derfor er svaret -1.
+          Vi leder efter tallet 500. Vi kan se, at 500 er ikke i listen. Derfor
+          er svaret -1.
         </>
       ),
     },
@@ -48,7 +47,7 @@ export default function ProblemTab() {
 
       <section className="problem-section">
         <h3>Pseudokode</h3>
-          <PseudoSection />
+        <PseudoSection />
       </section>
 
       <section className="problem-section">
@@ -56,6 +55,7 @@ export default function ProblemTab() {
         {examples.map(({ array, target, output, explanation }, index) => {
           return (
             <Example
+              key={index}
               index={index}
               array={array}
               target={target}

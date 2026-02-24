@@ -1,5 +1,5 @@
 const text = {
-  type: "text",
+  type: "cb_text",
   message0: "%1",
   args0: [{ type: "field_input", name: "TEXT", text: "" }],
   output: "String",
@@ -9,7 +9,7 @@ const text = {
 };
 
 const text_join = {
-  type: "text_join",
+  type: "cb_text_join",
   message0: "sammenflet %1 %2",
   args0: [
     { type: "input_value", name: "A" },
@@ -23,7 +23,7 @@ const text_join = {
 };
 
 const text_length = {
-  type: "text_length",
+  type: "cb_text_length",
   message0: "længde af %1",
   args0: [{ type: "input_value", name: "VALUE" }],
   output: "Number",
@@ -33,7 +33,7 @@ const text_length = {
 };
 
 const text_print = {
-  type: "text_print",
+  type: "cb_text_print",
   message0: "skriv %1",
   args0: [{ type: "input_value", name: "TEXT" }],
   previousStatement: null,
@@ -44,7 +44,7 @@ const text_print = {
 };
 
 const text_isEmpty = {
-  type: "text_isEmpty",
+  type: "cb_text_isEmpty",
   message0: "%1 er tom",
   args0: [{ type: "input_value", name: "VALUE" }],
   output: "Boolean",

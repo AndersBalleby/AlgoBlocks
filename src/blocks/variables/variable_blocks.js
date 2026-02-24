@@ -1,5 +1,5 @@
 const variables_get = {
-  type: "variables_get",
+  type: "cb_variables_get",
   message0: "%1",
   args0: [{ type: "field_variable", name: "VAR", variable: "variabel" }],
   output: null,
@@ -9,7 +9,7 @@ const variables_get = {
 };
 
 const variables_set = {
-  type: "variables_set",
+  type: "cb_variables_set",
   message0: "sæt %1 til %2",
   args0: [
     { type: "field_variable", name: "VAR", variable: "variabel" },
@@ -24,7 +24,7 @@ const variables_set = {
 };
 
 const variables_change = {
-  type: "variables_change",
+  type: "cb_variables_change",
   message0: "ændre %1 med %2",
   args0: [
     { type: "field_variable", name: "VAR", variable: "variabel" },

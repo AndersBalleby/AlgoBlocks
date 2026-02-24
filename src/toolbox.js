@@ -8,46 +8,46 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "logic_compare",
+          type: "cb_logic_compare",
         },
         {
           kind: "block",
-          type: "logic_operation",
+          type: "cb_logic_operation",
         },
         {
           kind: "block",
-          type: "logic_boolean",
+          type: "cb_logic_boolean",
         },
         {
           kind: "block",
-          type: "logic_negate",
+          type: "cb_logic_negate",
         },
         {
           kind: "block",
-          type: "logic_null",
+          type: "cb_logic_null",
         },
       ],
     },
     {
       kind: "category",
-      name: "Løkke",
+      name: "Løkker",
       colour: 120,
       contents: [
         {
           kind: "block",
-          type: "controls_for",
+          type: "cb_controls_for",
         },
         {
           kind: "block",
-          type: "controls_forEach",
+          type: "cb_controls_forEach",
         },
         {
           kind: "block",
-          type: "controls_whileUntil",
+          type: "cb_controls_whileUntil",
         },
         {
           kind: "block",
-          type: "controls_flow_statements",
+          type: "cb_controls_flow_statements",
         },
       ],
     },
@@ -58,27 +58,27 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "math_number",
+          type: "cb_math_number",
         },
         {
           kind: "block",
-          type: "math_arithmetic",
+          type: "cb_math_arithmetic",
         },
         {
           kind: "block",
-          type: "math_modulo",
+          type: "cb_math_modulo",
         },
         {
           kind: "block",
-          type: "math_round",
+          type: "cb_math_round",
         },
         {
           kind: "block",
-          type: "math_single",
+          type: "cb_math_single",
         },
         {
           kind: "block",
-          type: "math_random_int",
+          type: "cb_math_random_int",
         },
       ],
     },
@@ -89,23 +89,23 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "text",
+          type: "cb_text",
         },
         {
           kind: "block",
-          type: "text_join",
+          type: "cb_text_join",
         },
         {
           kind: "block",
-          type: "text_length",
+          type: "cb_text_length",
         },
         {
           kind: "block",
-          type: "text_print",
+          type: "cb_text_print",
         },
         {
           kind: "block",
-          type: "text_isEmpty",
+          type: "cb_text_isEmpty",
         },
       ],
     },
@@ -116,31 +116,31 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "lists_create_empty",
+          type: "cb_lists_create_empty",
         },
         {
           kind: "block",
-          type: "lists_create_with",
+          type: "cb_lists_create_with",
         },
         {
           kind: "block",
-          type: "lists_length",
+          type: "cb_lists_length",
         },
         {
           kind: "block",
-          type: "lists_getIndex",
+          type: "cb_lists_getIndex",
         },
         {
           kind: "block",
-          type: "lists_setIndex",
+          type: "cb_lists_setIndex",
         },
         {
           kind: "block",
-          type: "lists_isEmpty",
+          type: "cb_lists_isEmpty",
         },
         {
           kind: "block",
-          type: "lists_indexOf",
+          type: "cb_lists_indexOf",
         },
       ],
     },
@@ -151,11 +151,11 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "controls_if",
+          type: "cb_controls_if",
         },
         {
           kind: "block",
-          type: "controls_ifelse",
+          type: "cb_controls_ifelse",
         },
       ],
     },
@@ -166,15 +166,15 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "variables_get",
+          type: "cb_variables_get",
         },
         {
           kind: "block",
-          type: "variables_set",
+          type: "cb_variables_set",
         },
         {
           kind: "block",
-          type: "variables_change",
+          type: "cb_variables_change",
         },
       ],
     },
@@ -185,23 +185,23 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "procedures_defnoreturn",
+          type: "cb_procedures_defnoreturn",
         },
         {
           kind: "block",
-          type: "procedures_defreturn",
+          type: "cb_procedures_defreturn",
         },
         {
           kind: "block",
-          type: "procedures_callnoreturn",
+          type: "cb_procedures_callnoreturn",
         },
         {
           kind: "block",
-          type: "procedures_callreturn",
+          type: "cb_procedures_callreturn",
         },
         {
           kind: "block",
-          type: "procedures_ifreturn",
+          type: "cb_procedures_ifreturn",
         },
       ],
     },

@@ -1,5 +1,5 @@
 const math_number = {
-  type: "math_number",
+  type: "cb_math_number",
   message0: "%1",
   args0: [{ type: "field_number", name: "NUM", value: 0 }],
   output: "Number",
@@ -9,7 +9,7 @@ const math_number = {
 };
 
 const math_arithmetic = {
-  type: "math_arithmetic",
+  type: "cb_math_arithmetic",
   message0: "%1 %2 %3",
   args0: [
     { type: "input_value", name: "A", check: "Number" },
@@ -34,7 +34,7 @@ const math_arithmetic = {
 };
 
 const math_modulo = {
-  type: "math_modulo",
+  type: "cb_math_modulo",
   message0: "%1 mod %2",
   args0: [
     { type: "input_value", name: "DIVIDEND", check: "Number" },
@@ -48,7 +48,7 @@ const math_modulo = {
 };
 
 const math_round = {
-  type: "math_round",
+  type: "cb_math_round",
   message0: "%1 %2",
   args0: [
     {
@@ -70,7 +70,7 @@ const math_round = {
 };
 
 const math_single = {
-  type: "math_single",
+  type: "cb_math_single",
   message0: "%1 %2",
   args0: [
     {
@@ -92,7 +92,7 @@ const math_single = {
 };
 
 const math_random_int = {
-  type: "math_random_int",
+  type: "cb_math_random_int",
   message0: "tilfældigt heltal fra %1 til %2",
   args0: [
     { type: "input_value", name: "FROM", check: "Number" },

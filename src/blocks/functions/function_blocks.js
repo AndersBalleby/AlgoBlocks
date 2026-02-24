@@ -1,5 +1,5 @@
 const procedures_defnoreturn = {
-  type: "procedures_defnoreturn",
+  type: "cb_procedures_defnoreturn",
   message0: "funktion %1 %2",
   args0: [
     { type: "field_input", name: "NAME", text: "minFunktion" },
@@ -11,7 +11,7 @@ const procedures_defnoreturn = {
 };
 
 const procedures_defreturn = {
-  type: "procedures_defreturn",
+  type: "cb_procedures_defreturn",
   message0: "funktion %1 %2 returner %3",
   args0: [
     { type: "field_input", name: "NAME", text: "minFunktion" },
@@ -24,7 +24,7 @@ const procedures_defreturn = {
 };
 
 const procedures_callnoreturn = {
-  type: "procedures_callnoreturn",
+  type: "cb_procedures_callnoreturn",
   message0: "kald %1",
   args0: [{ type: "field_input", name: "NAME", text: "minFunktion" }],
   previousStatement: null,
@@ -35,7 +35,7 @@ const procedures_callnoreturn = {
 };
 
 const procedures_callreturn = {
-  type: "procedures_callreturn",
+  type: "cb_procedures_callreturn",
   message0: "kald %1",
   args0: [{ type: "field_input", name: "NAME", text: "minFunktion" }],
   output: null,
@@ -45,7 +45,7 @@ const procedures_callreturn = {
 };
 
 const procedures_ifreturn = {
-  type: "procedures_ifreturn",
+  type: "cb_procedures_ifreturn",
   message0: "hvis %1 returner %2",
   args0: [
     { type: "input_value", name: "CONDITION", check: "Boolean" },
