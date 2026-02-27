@@ -30,6 +30,10 @@ javascriptGenerator.forBlock["cb_math_arithmetic"] = function (
   const a = generator.valueToCode(block, "A", Order.RELATIONAL) || "0";
   const b = generator.valueToCode(block, "B", Order.RELATIONAL) || "0";
 
+  if (order === Order.DIVISION && b === "0") {
+    return [`/* division med nul er ikke tilladt */`, Order.ATOMIC];
+  }
+
   return [`${a} ${op} ${b}`, order];
 };
 
