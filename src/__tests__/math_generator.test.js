@@ -1,16 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { javascriptGenerator } from "blockly/javascript";
+import { describe, it, expect } from "vitest";
 import "../blocks/math/math_generator";
-
-function makeArithmeticBlock(op, a, b) {
-  const block = {
-    getFieldValue: (field) => (field === "OP" ? op : null),
-  };
-  const generator = {
-    valueToCode: (_, input) => (input === "A" ? a : b),
-  };
-  return { block, generator };
-}
+import { testBlock } from "./test_utils";
 
 describe("cb_math_arithmetic", () => {
   it.each([
@@ -21,27 +11,17 @@ describe("cb_math_arithmetic", () => {
     ["DIVIDE", "3", "0", "/* division med nul er ikke tilladt */"],
     ["POWER", "3", "4", "3 ** 4"],
   ])("generates %s correctly", (op, a, b, expected) => {
-    const { block, generator } = makeArithmeticBlock(op, a, b);
-    const [code] = javascriptGenerator.forBlock["cb_math_arithmetic"](
-      block,
-      generator,
+    expect(testBlock("cb_math_arithmetic", { OP: op }, { A: a, B: b })).toBe(
+      expected,
     );
-    expect(code).toBe(expected);
   });
 });
 
 describe("cb_math_modulo", () => {
   it("generates MODULO operation correctly", () => {
-    const block = {};
-    const generator = {
-      valueToCode: (_, input) => (input === "DIVIDEND" ? "3" : "4"),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_math_modulo"](
-      block,
-      generator,
+    expect(testBlock("cb_math_modulo", null, { DIVIDEND: 3, DIVISOR: 4 })).toBe(
+      "3 % 4",
     );
-    expect(code).toBe("3 % 4");
   });
 });
 
@@ -51,19 +31,9 @@ describe("cb_math_round", () => {
     ["ROUNDUP", "2.5", "Math.ceil(2.5)"],
     ["ROUNDDOWN", "2.5", "Math.floor(2.5)"],
   ])("generates %s correctly", (operator, num, expected) => {
-    const block = {
-      getFieldValue: (field) => (field === "OP" ? operator : null),
-    };
-
-    const generator = {
-      valueToCode: (_, input) => (input === "NUM" ? num : null),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_math_round"](
-      block,
-      generator,
+    expect(testBlock("cb_math_round", { OP: operator }, { NUM: num })).toBe(
+      expected,
     );
-    expect(code).toBe(expected);
   });
 });
 
@@ -72,33 +42,16 @@ describe("cb_math_single", () => {
     ["ROOT", "2.5", "Math.sqrt(2.5)"],
     ["ABS", "2.5", "Math.abs(2.5)"],
   ])("generates %s correctly", (operator, num, expected) => {
-    const block = {
-      getFieldValue: (field) => (field === "OP" ? operator : null),
-    };
-
-    const generator = {
-      valueToCode: (_, input) => (input === "NUM" ? num : null),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_math_single"](
-      block,
-      generator,
+    expect(testBlock("cb_math_single", { OP: operator }, { NUM: 2.5 })).toBe(
+      expected,
     );
-    expect(code).toBe(expected);
   });
 });
 
 describe("cb_math_random_int", () => {
   it("generates RANDOM correctly", () => {
-    const block = {};
-    const generator = {
-      valueToCode: (_, input) => (input === "FROM" ? "1" : "10"),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_math_random_int"](
-      block,
-      generator,
+    expect(testBlock("cb_math_random_int", null, { FROM: 1, TO: 10 })).toBe(
+      "Math.floor(Math.random() * (10 - 1 + 1)) + 1",
     );
-    expect(code).toBe("Math.floor(Math.random() * (10 - 1 + 1)) + 1");
   });
 });

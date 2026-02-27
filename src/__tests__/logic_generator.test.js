@@ -1,6 +1,7 @@
 import { javascriptGenerator } from "blockly/javascript";
 import { describe, expect, it } from "vitest";
 import "../blocks/logic/logic_generator";
+import { testBlock } from "./test_utils";
 
 describe("cb_logic_compare", () => {
   it.each([
@@ -11,18 +12,9 @@ describe("cb_logic_compare", () => {
     ["GT", "2", "3", "2 > 3"],
     ["GTE", "2", "3", "2 >= 3"],
   ])("generates %s correctly", (operator, num1, num2, expected) => {
-    const block = {
-      getFieldValue: (field) => (field === "OP" ? operator : null),
-    };
-    const generator = {
-      valueToCode: (_, input) => (input === "A" ? num1 : num2),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_logic_compare"](
-      block,
-      generator,
-    );
-    expect(code).toBe(expected);
+    expect(
+      testBlock("cb_logic_compare", { OP: operator }, { A: num1, B: num2 }),
+    ).toBe(expected);
   });
 });
 
@@ -31,18 +23,13 @@ describe("cb_logic_operation", () => {
     ["AND", "input1", "input2", "input1 && input2"],
     ["OR", "input1", "input2", "input1 || input2"],
   ])("generates %s correctly", (operator, input1, input2, expected) => {
-    const block = {
-      getFieldValue: (field) => (field === "OP" ? operator : null),
-    };
-    const generator = {
-      valueToCode: (_, input) => (input === "A" ? input1 : input2),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_logic_operation"](
-      block,
-      generator,
-    );
-    expect(code).toBe(expected);
+    expect(
+      testBlock(
+        "cb_logic_operation",
+        { OP: operator },
+        { A: input1, B: input2 },
+      ),
+    ).toBe(expected);
   });
 });
 
@@ -51,43 +38,20 @@ describe("cb_logic_boolean", () => {
     ["TRUE", "true"],
     ["FALSE", "false"],
   ])("generates %s correctly", (operator, expected) => {
-    const block = {
-      getFieldValue: (field) => (field === "BOOL" ? operator : null),
-    };
-    const generator = {};
-
-    const [code] = javascriptGenerator.forBlock["cb_logic_boolean"](
-      block,
-      generator,
+    expect(testBlock("cb_logic_boolean", { BOOL: operator }, {})).toBe(
+      expected,
     );
-    expect(code).toBe(expected);
   });
 });
 
 describe("cb_logic_negate", () => {
   it("generates NEGATION correctly", () => {
-    const block = {};
-    const generator = {
-      valueToCode: (_, input) => (input === "BOOL" ? "true" : null),
-    };
-
-    const [code] = javascriptGenerator.forBlock["cb_logic_negate"](
-      block,
-      generator,
-    );
-    expect(code).toBe("!true");
+    expect(testBlock("cb_logic_negate", null, { BOOL: "true" })).toBe("!true");
   });
 });
 
 describe("cb_logic_null", () => {
   it("generates NULL correctly", () => {
-    const block = {};
-    const generator = {};
-
-    const [code] = javascriptGenerator.forBlock["cb_logic_null"](
-      block,
-      generator,
-    );
-    expect(code).toBe("null");
+    expect(testBlock("cb_logic_null", null, null)).toBe("null");
   });
 });
