@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import BlocklyWorkspace from "./components/BlocklyWorkspace";
 import "./app.css";
 import TestCaseTab from "./components/TestCaseTab";
 import ProblemTab from "./components/ProblemTab";
 import { linearSearchToolbox } from "./toolbox";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
   const [isRunning, setIsRunning] = useState(false);
   const [generatedCode, setGeneratedCode] = useState(null);
 
-  function handleRun() {
-    if (generatedCode) {
-      setActiveTab("solutionTab");
-    }
-    setIsRunning(true);
-  }
+  const handleRun = useCallback(
+    function () {
+      if (generatedCode) {
+        setActiveTab("solutionTab");
+      }
+      setIsRunning(true);
+    },
+    [generatedCode],
+  );
 
   function handleReset() {
     setIsRunning(false);
     setGeneratedCode(null);
   }
 
-  function handleCodeGenerated(code) {
+  const handleCodeGenerated = useCallback(function (code) {
     setGeneratedCode(code);
-  }
+  }, []);
 
   function onFinished() {
     setIsRunning(false);
@@ -32,7 +36,7 @@ export default function App() {
 
   return (
     <>
-      <body>
+      <div id="app">
         <div id="header">
           <h1>Workshop | Algoritmer</h1>
           <div id="headerButtons">
@@ -87,14 +91,16 @@ export default function App() {
             </div>
           </div>
 
-          <BlocklyWorkspace
-            toolbox={linearSearchToolbox}
-            isRunning={isRunning}
-            setIsRunning={setIsRunning}
-            onRun={handleCodeGenerated}
-          />
+          <ErrorBoundary>
+            <BlocklyWorkspace
+              toolbox={linearSearchToolbox}
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+              onRun={handleCodeGenerated}
+            />
+          </ErrorBoundary>
         </div>
-      </body>
+      </div>
     </>
   );
 }

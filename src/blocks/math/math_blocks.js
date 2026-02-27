@@ -79,7 +79,6 @@ const math_single = {
       options: [
         ["√", "ROOT"],
         ["abs", "ABS"],
-        ["-", "NEG"],
       ],
     },
     { type: "input_value", name: "NUM", check: "Number" },

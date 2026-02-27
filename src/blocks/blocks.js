@@ -20,4 +20,8 @@ const blockData = [
 ];
 
 const blocks = Blockly.common.createBlockDefinitionsFromJsonArray(blockData);
-Blockly.common.defineBlocks(blocks);
+
+const newBlocks = Object.fromEntries(
+  Object.entries(blocks).filter(([type]) => !Blockly.Blocks[type]),
+);
+Blockly.common.defineBlocks(newBlocks);

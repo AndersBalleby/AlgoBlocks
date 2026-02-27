@@ -1,4 +1,5 @@
 import "../blocks/logic/logic_generator";
+import "../blocks/math/math_generator";
 import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
@@ -13,40 +14,42 @@ export default function BlocklyWorkspace({
   const workspace = useRef(null);
 
   useEffect(() => {
-    if (blocklyDiv.current && !workspace.current) {
-      workspace.current = Blockly.inject(blocklyDiv.current, {
-        toolbox: toolbox,
-        scrollbars: false,
-        trashcan: true,
-        move: {
-          scrollbars: false,
-        },
-        zoom: {
-          controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 3,
-          minScale: 0.3,
-          scaleSpeed: 1.2,
-        },
-      });
-    }
+    if (!blocklyDiv.current || workspace.current) return;
 
-    /* TODO: Tilføj saveWorkspace og loadWorkspace */
+    workspace.current = Blockly.inject(blocklyDiv.current, {
+      toolbox,
+      scrollbars: false,
+      trashcan: true,
+      move: { scrollbars: false },
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2,
+      },
+    });
 
     return () => {
-      if (workspace.current) {
-        workspace.current.dispose();
-        workspace.current = null;
-      }
+      workspace.current?.dispose();
+      workspace.current = null;
     };
+  }, []);
+
+  useEffect(() => {
+    if (workspace.current) {
+      workspace.current.updateToolbox(toolbox);
+    }
   }, [toolbox]);
 
   useEffect(() => {
     if (isRunning) {
+      if (!workspace.current) return;
       if (workspace.current.getAllBlocks().length === 0) {
         alert("Du skal placere blokke før du kan afprøve din kode");
         setIsRunning(false);
+        return;
       }
       const code = javascriptGenerator.workspaceToCode(workspace.current);
       onRun(code);
