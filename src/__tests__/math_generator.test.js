@@ -31,7 +31,7 @@ describe("cb_math_arithmetic", () => {
 });
 
 describe("cb_math_modulo", () => {
-  it("handles modulo operation correctly", () => {
+  it("generates MODULO operation correctly", () => {
     const block = {};
     const generator = {
       valueToCode: (_, input) => (input === "DIVIDEND" ? "3" : "4"),
@@ -42,5 +42,63 @@ describe("cb_math_modulo", () => {
       generator,
     );
     expect(code).toBe("3 % 4");
+  });
+});
+
+describe("cb_math_round", () => {
+  it.each([
+    ["ROUND", "2.5", "Math.round(2.5)"],
+    ["ROUNDUP", "2.5", "Math.ceil(2.5)"],
+    ["ROUNDDOWN", "2.5", "Math.floor(2.5)"],
+  ])("generates %s correctly", (operator, num, expected) => {
+    const block = {
+      getFieldValue: (field) => (field === "OP" ? operator : null),
+    };
+
+    const generator = {
+      valueToCode: (_, input) => (input === "NUM" ? num : null),
+    };
+
+    const [code] = javascriptGenerator.forBlock["cb_math_round"](
+      block,
+      generator,
+    );
+    expect(code).toBe(expected);
+  });
+});
+
+describe("cb_math_single", () => {
+  it.each([
+    ["ROOT", "2.5", "Math.sqrt(2.5)"],
+    ["ABS", "2.5", "Math.abs(2.5)"],
+  ])("generates %s correctly", (operator, num, expected) => {
+    const block = {
+      getFieldValue: (field) => (field === "OP" ? operator : null),
+    };
+
+    const generator = {
+      valueToCode: (_, input) => (input === "NUM" ? num : null),
+    };
+
+    const [code] = javascriptGenerator.forBlock["cb_math_single"](
+      block,
+      generator,
+    );
+    expect(code).toBe(expected);
+  });
+});
+
+describe("cb_math_random_int", () => {
+  it("generates RANDOM correctly", () => {
+    const block = {};
+    const generator = {
+      valueToCode: (_, input) => (input === "FROM" ? "1" : "10"),
+    };
+
+    const [code] = javascriptGenerator.forBlock["cb_math_random_int"](
+      block,
+      generator,
+    );
+    expect(code).toBe("Math.floor(Math.random() * (10 - 1 + 1)) + 1");
   });
 });
