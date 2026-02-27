@@ -29,3 +29,18 @@ describe("cb_math_arithmetic", () => {
     expect(code).toBe(expected);
   });
 });
+
+describe("cb_math_modulo", () => {
+  it("handles modulo operation correctly", () => {
+    const block = {};
+    const generator = {
+      valueToCode: (_, input) => (input === "DIVIDEND" ? "3" : "4"),
+    };
+
+    const [code] = javascriptGenerator.forBlock["cb_math_modulo"](
+      block,
+      generator,
+    );
+    expect(code).toBe("3 % 4");
+  });
+});
