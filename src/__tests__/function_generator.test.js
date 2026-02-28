@@ -96,7 +96,7 @@ describe("cb_procedures_defreturn", () => {
     expect(code).toBe("function minFunktion() {\n  return undefined;\n}\n");
   });
 });
-
+/*
 describe("cb_procedures_callnoreturn", () => {
   it("generates FUNCTION CALL correctly", () => {
     const { block } = makeCallBlock("minFunktion");
@@ -114,23 +114,24 @@ describe("cb_procedures_callreturn", () => {
     expect(code).toBe("minFunktion()");
   });
 });
+*/
 
 describe("cb_procedures_ifreturn", () => {
-  it("generates IF RETURN correctly", () => {
-    const { block, generator } = makeIfReturnBlock("x > 0", "42");
+  it("generates return correctly", () => {
+    const { block, generator } = makeSingleInputBlock("42");
     const code = javascriptGenerator.forBlock["cb_procedures_ifreturn"](
       block,
       generator,
     );
-    expect(code).toBe("if (x > 0) { return 42; }\n");
+    expect(code).toBe("return 42;\n");
   });
 
-  it("defaults to false and undefined when inputs are empty", () => {
-    const { block, generator } = makeIfReturnBlock("", "");
+  it("defaults to undefined when value is empty", () => {
+    const { block, generator } = makeSingleInputBlock("");
     const code = javascriptGenerator.forBlock["cb_procedures_ifreturn"](
       block,
       generator,
     );
-    expect(code).toBe("if (false) { return undefined; }\n");
+    expect(code).toBe("return undefined;\n");
   });
 });

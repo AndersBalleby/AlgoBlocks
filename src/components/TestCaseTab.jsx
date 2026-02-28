@@ -59,6 +59,7 @@ export default function TestCaseTab({
               ${code}
               linearSøgning([${array}], ${target});
             `;
+            console.log(code);
             result = eval(wrapped);
           } catch (e) {
             result = null;

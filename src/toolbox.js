@@ -189,14 +189,6 @@ export const linearSearchToolbox = {
         },
         {
           kind: "block",
-          type: "cb_procedures_callnoreturn",
-        },
-        {
-          kind: "block",
-          type: "cb_procedures_callreturn",
-        },
-        {
-          kind: "block",
           type: "cb_procedures_ifreturn",
         },
       ],
