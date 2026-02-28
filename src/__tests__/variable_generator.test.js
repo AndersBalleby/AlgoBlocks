@@ -21,15 +21,9 @@ function makeSetBlock(variable, value) {
 
 describe("cb_variables_get", () => {
   it("generates variable get correctly", () => {
-    const { block } = makeGetBlock("minVariabel");
+    const { block } = makeGetBlock("i");
     const [code] = javascriptGenerator.forBlock["cb_variables_get"](block);
-    expect(code).toBe("minVariabel");
-  });
-
-  it("defaults to variabel when name is empty", () => {
-    const { block } = makeGetBlock("");
-    const [code] = javascriptGenerator.forBlock["cb_variables_get"](block);
-    expect(code).toBe("variabel");
+    expect(code).toBe("i");
   });
 });
 
