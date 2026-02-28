@@ -3,6 +3,7 @@ import "../blocks/math/math_generator";
 import "../blocks/text/text_generator";
 import "../blocks/conditionals/conditional_generator";
 import "../blocks/functions/function_generators";
+import "../blocks/lists/list_generator";
 import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";

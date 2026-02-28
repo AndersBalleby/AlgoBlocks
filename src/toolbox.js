@@ -116,10 +116,6 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "cb_lists_create_empty",
-        },
-        {
-          kind: "block",
           type: "cb_lists_create_with",
         },
         {

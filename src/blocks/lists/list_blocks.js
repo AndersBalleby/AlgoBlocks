@@ -1,12 +1,3 @@
-const lists_create_empty = {
-  type: "cb_lists_create_empty",
-  message0: "tom liste",
-  output: "Array",
-  colour: 260,
-  tooltip: "Opretter en tom liste.",
-  helpUrl: "",
-};
-
 const lists_create_with = {
   type: "cb_lists_create_with",
   message0: "liste med %1 %2 %3",
@@ -88,7 +79,6 @@ const lists_indexOf = {
 };
 
 export const list_data = [
-  lists_create_empty,
   lists_create_with,
   lists_length,
   lists_getIndex,
