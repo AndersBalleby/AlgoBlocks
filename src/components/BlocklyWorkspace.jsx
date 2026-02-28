@@ -5,6 +5,7 @@ import "../blocks/conditionals/conditional_generator";
 import "../blocks/functions/function_generators";
 import "../blocks/lists/list_generator";
 import "../blocks/loops/loop_generator";
+import "../blocks/variables/variable_generator";
 import { useEffect, useRef } from "react";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
