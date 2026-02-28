@@ -44,39 +44,40 @@ export default function TestCaseTab({
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    if (isRunning && generatedCode) {
-      setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
+    if (!isRunning || !generatedCode) return;
 
-      const runTests = async () => {
-        const code = generatedCode;
+    setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
 
-        for (let i = 0; i < testCases.length; ++i) {
-          const { array, target, expected } = testCases[i];
+    const runTests = async () => {
+      const code = generatedCode;
 
-          let result;
-          try {
-            const wrapped = `
+      for (let i = 0; i < testCases.length; ++i) {
+        const { array, target, expected } = testCases[i];
+
+        let result;
+        try {
+          const wrapped = `
               ${code}
-              linearSøgning([${array}], ${target});
+              lineærSøgning([${array}], ${target});
             `;
-            console.log(code);
-            result = eval(wrapped);
-          } catch (e) {
-            result = null;
-          }
-
-          const status = result === expected ? "pass" : "fail";
-
-          setTestCases((prev) =>
-            prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
-          );
-
-          await sleep(600);
+          console.log(code);
+          result = eval(wrapped);
+        } catch (e) {
+          result = null;
         }
-        onFinished();
-      };
-      runTests();
-    }
+
+        const status = result === expected ? "pass" : "fail";
+
+        setTestCases((prev) =>
+          prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
+        );
+
+        await sleep(600);
+      }
+      onFinished();
+    };
+
+    runTests();
   }, [isRunning, generatedCode]);
 
   return (

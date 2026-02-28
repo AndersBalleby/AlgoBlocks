@@ -11,15 +11,9 @@ export default function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [generatedCode, setGeneratedCode] = useState(null);
 
-  const handleRun = useCallback(
-    function () {
-      if (generatedCode) {
-        setActiveTab("solutionTab");
-      }
-      setIsRunning(true);
-    },
-    [generatedCode],
-  );
+  const handleRun = useCallback(function () {
+    setIsRunning(true);
+  }, []);
 
   function handleReset() {
     setIsRunning(false);
@@ -28,6 +22,7 @@ export default function App() {
 
   const handleCodeGenerated = useCallback(function (code) {
     setGeneratedCode(code);
+    setActiveTab("solutionTab");
   }, []);
 
   function onFinished() {

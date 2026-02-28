@@ -7,14 +7,11 @@ export default function TestCase({
   isActive,
   onClick,
 }) {
-  const isNotFound = (v) => v === -1 || v === "ikke fundet";
   const shortArray =
     array.length > 5
       ? `[${array.slice(0, 5).join(", ")}, …]`
       : `[${array.join(", ")}]`;
-  const expectedText = isNotFound(expected)
-    ? "ikke fundet"
-    : `indeks ${expected}`;
+  const expectedText = `indeks ${expected}`;
 
   // Base classes
   const baseClasses =

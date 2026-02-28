@@ -1,7 +1,8 @@
+import * as Blockly from "blockly";
 import { javascriptGenerator, Order } from "blockly/javascript";
 
 javascriptGenerator.forBlock["cb_controls_for"] = function (block, generator) {
-  const variable = block.getFieldValue("VAR") || "i";
+  const variable = block.getFieldValue("VAR");
   const from = generator.valueToCode(block, "FROM", Order.NONE) || "0";
   const to = generator.valueToCode(block, "TO", Order.NONE) || "0";
   const body = generator.statementToCode(block, "DO");
@@ -13,7 +14,7 @@ javascriptGenerator.forBlock["cb_controls_forEach"] = function (
   block,
   generator,
 ) {
-  const variable = block.getFieldValue("VAR") || "element";
+  const variable = block.getFieldValue("VAR");
   const list = generator.valueToCode(block, "LIST", Order.NONE) || "[]";
   const body = generator.statementToCode(block, "DO");
 
