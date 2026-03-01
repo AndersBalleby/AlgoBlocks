@@ -50,7 +50,6 @@ export default function TestCaseTab({
 
     const runTests = async () => {
       const code = generatedCode;
-
       for (let i = 0; i < testCases.length; ++i) {
         const { array, target, expected } = testCases[i];
 
@@ -60,14 +59,13 @@ export default function TestCaseTab({
               ${code}
               lineærSøgning([${array}], ${target});
             `;
-          console.log(code);
+
           result = eval(wrapped);
         } catch (e) {
           result = null;
         }
 
         const status = result === expected ? "pass" : "fail";
-
         setTestCases((prev) =>
           prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
         );
@@ -144,12 +142,25 @@ export default function TestCaseTab({
             className={`action-btn run-btn ${isRunning ? "btn-loading" : ""}`}
             onClick={onRun}
             disabled={isRunning}
+            style={isRunning ? { cursor: "not-allowed " } : {}}
           >
             {isRunning ? "Kører..." : "Kør Algoritme"}
           </button>
-          <button className="action-btn reset-btn" onClick={onReset}>
+          <button
+            className="action-btn reset-btn"
+            disabled={isRunning}
+            onClick={onReset}
+            style={isRunning ? { cursor: "not-allowed " } : {}}
+          >
             Nulstil
           </button>
+        </div>
+        <div id="codeTab" className="pt-5">
+          <h3>Din Genererede Kode</h3>
+          <div className="pseudocodeContent">
+            {/* Ved ikke hvorfor den ikke viser det af default?? */}
+            {generatedCode ? generatedCode : "Ingen kode endnu"}
+          </div>
         </div>
       </section>
     </>
