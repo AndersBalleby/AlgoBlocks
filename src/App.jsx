@@ -1,15 +1,17 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import BlocklyWorkspace from "./components/BlocklyWorkspace";
 import "./app.css";
 import TestCaseTab from "./components/TestCaseTab";
 import ProblemTab from "./components/ProblemTab";
 import { linearSearchToolbox } from "./toolbox";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import UnsupportedScreen from "./components/UnsupportedScreen";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
   const [isRunning, setIsRunning] = useState(false);
   const [generatedCode, setGeneratedCode] = useState("Ingen kode endnu");
+  const [isTooSmall, setIsTooSmall] = useState(window.innerWidth < 1024);
 
   const handleRun = useCallback(function () {
     setIsRunning(true);
@@ -28,6 +30,17 @@ export default function App() {
   function onFinished() {
     setIsRunning(false);
   }
+
+  useEffect(() => {
+    function handleResize() {
+      setIsTooSmall(window.innerWidth < 1024);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleReset);
+  }, []);
+
+  if (isTooSmall) return <UnsupportedScreen />;
 
   return (
     <>
@@ -51,6 +64,12 @@ export default function App() {
               Nulstil
             </button>
           </div>
+          <p>
+            Powered by{" "}
+            <span className="text-[#6366f1] underline">
+              <a href="https://ballebysoftware.dk/">BallebySoftware</a>
+            </span>
+          </p>
         </div>
 
         <div id="pageContainer">
