@@ -44,38 +44,38 @@ export default function TestCaseTab({
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    if (isRunning && generatedCode) {
-      setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
+    if (!isRunning || !generatedCode) return;
 
-      const runTests = async () => {
-        const code = generatedCode;
+    setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
 
-        for (let i = 0; i < testCases.length; ++i) {
-          const { array, target, expected } = testCases[i];
+    const runTests = async () => {
+      const code = generatedCode;
+      for (let i = 0; i < testCases.length; ++i) {
+        const { array, target, expected } = testCases[i];
 
-          let result;
-          try {
-            const wrapped = `
+        let result;
+        try {
+          const wrapped = `
               ${code}
-              linearSøgning([${array}], ${target});
+              lineærSøgning([${array}], ${target});
             `;
-            result = eval(wrapped);
-          } catch (e) {
-            result = null;
-          }
 
-          const status = result === expected ? "pass" : "fail";
-
-          setTestCases((prev) =>
-            prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
-          );
-
-          await sleep(600);
+          result = eval(wrapped);
+        } catch (e) {
+          result = null;
         }
-        onFinished();
-      };
-      runTests();
-    }
+
+        const status = result === expected ? "pass" : "fail";
+        setTestCases((prev) =>
+          prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
+        );
+
+        await sleep(600);
+      }
+      onFinished();
+    };
+
+    runTests();
   }, [isRunning, generatedCode]);
 
   return (
@@ -142,12 +142,25 @@ export default function TestCaseTab({
             className={`action-btn run-btn ${isRunning ? "btn-loading" : ""}`}
             onClick={onRun}
             disabled={isRunning}
+            style={isRunning ? { cursor: "not-allowed " } : {}}
           >
             {isRunning ? "Kører..." : "Kør Algoritme"}
           </button>
-          <button className="action-btn reset-btn" onClick={onReset}>
+          <button
+            className="action-btn reset-btn"
+            disabled={isRunning}
+            onClick={onReset}
+            style={isRunning ? { cursor: "not-allowed " } : {}}
+          >
             Nulstil
           </button>
+        </div>
+        <div id="codeTab" className="pt-5">
+          <h3>Din Genererede Kode</h3>
+          <div className="pseudocodeContent">
+            {/* Ved ikke hvorfor den ikke viser det af default?? */}
+            {generatedCode ? generatedCode : "Ingen kode endnu"}
+          </div>
         </div>
       </section>
     </>

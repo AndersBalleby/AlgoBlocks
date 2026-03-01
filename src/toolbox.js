@@ -116,10 +116,6 @@ export const linearSearchToolbox = {
       contents: [
         {
           kind: "block",
-          type: "cb_lists_create_empty",
-        },
-        {
-          kind: "block",
           type: "cb_lists_create_with",
         },
         {
@@ -190,14 +186,6 @@ export const linearSearchToolbox = {
         {
           kind: "block",
           type: "cb_procedures_defreturn",
-        },
-        {
-          kind: "block",
-          type: "cb_procedures_callnoreturn",
-        },
-        {
-          kind: "block",
-          type: "cb_procedures_callreturn",
         },
         {
           kind: "block",

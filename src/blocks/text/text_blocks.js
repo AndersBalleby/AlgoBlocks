@@ -12,8 +12,8 @@ const text_join = {
   type: "cb_text_join",
   message0: "sammenflet %1 %2",
   args0: [
-    { type: "input_value", name: "A" },
-    { type: "input_value", name: "B" },
+    { type: "input_value", name: "A", check: "String" },
+    { type: "input_value", name: "B", check: "String" },
   ],
   inputsInline: true,
   output: "String",

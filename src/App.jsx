@@ -9,25 +9,20 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
   const [isRunning, setIsRunning] = useState(false);
-  const [generatedCode, setGeneratedCode] = useState(null);
+  const [generatedCode, setGeneratedCode] = useState("Ingen kode endnu");
 
-  const handleRun = useCallback(
-    function () {
-      if (generatedCode) {
-        setActiveTab("solutionTab");
-      }
-      setIsRunning(true);
-    },
-    [generatedCode],
-  );
+  const handleRun = useCallback(function () {
+    setIsRunning(true);
+  }, []);
 
   function handleReset() {
     setIsRunning(false);
-    setGeneratedCode(null);
+    setGeneratedCode("Ingen kode endnu");
   }
 
   const handleCodeGenerated = useCallback(function (code) {
     setGeneratedCode(code);
+    setActiveTab("solutionTab");
   }, []);
 
   function onFinished() {
@@ -40,10 +35,19 @@ export default function App() {
         <div id="header">
           <h1>Workshop | Algoritmer</h1>
           <div id="headerButtons">
-            <button className="action-btn run-btn" onClick={handleRun}>
+            <button
+              className="action-btn run-btn"
+              onClick={handleRun}
+              style={isRunning ? { cursor: "not-allowed " } : {}}
+            >
               Kør Algoritme
             </button>
-            <button className="action-btn reset-btn" onClick={handleReset}>
+            <button
+              className={`action-btn reset-btn`}
+              disabled={isRunning}
+              onClick={handleReset}
+              style={isRunning ? { cursor: "not-allowed " } : {}}
+            >
               Nulstil
             </button>
           </div>
