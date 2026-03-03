@@ -43,6 +43,19 @@ function safeEval(code, timeoutMS = 3000) {
   });
 }
 
+function translateError(message) {
+  if (message.includes("uendeligt loop")) return message;
+  if (message.includes("Maximum call stack"))
+    return "Din funktion kalder sig selv for mange gange — måske mangler der et stop-kriterie?";
+  if (message.includes("is not defined"))
+    return `En variabel eller funktion blev brugt uden at være defineret — har du husket at definere din funktion?`;
+  if (message.includes("is not a function"))
+    return "Du prøver at kalde noget som ikke er en funktion.";
+  if (message.includes("Cannot read propert"))
+    return "Du prøver at tilgå en egenskab på en tom værdi (undefined eller null).";
+  return `Ukendt fejl: ${message}`;
+}
+
 export default function TestCaseTab({
   isRunning,
   generatedCode,
@@ -97,6 +110,7 @@ export default function TestCaseTab({
         const { array, target, expected } = testCases[i];
 
         let result;
+        let error = null;
         try {
           const wrapped = `
               ${code}
@@ -106,12 +120,14 @@ export default function TestCaseTab({
           result = await safeEval(wrapped);
         } catch (e) {
           result = null;
-          console.warn(e.message);
+          error = e.message;
         }
 
-        const status = result === expected ? "pass" : "fail";
+        const status = error ? "error" : result === expected ? "pass" : "fail";
         setTestCases((prev) =>
-          prev.map((tc, index) => (index === i ? { ...tc, status } : tc)),
+          prev.map((tc, index) =>
+            index === i ? { ...tc, status, actual: result, error } : tc,
+          ),
         );
 
         await sleep(600);
@@ -172,12 +188,43 @@ export default function TestCaseTab({
                   [{testCases[selectedTestCase].array.join(", ")}]
                 </span>
               </div>
-              <div className="text-sm">
+              <div className="mb-1 text-sm">
                 <span style={{ color: "#64748b" }}>Forventet resultat: </span>
                 <span style={{ color: "#6366f1", fontWeight: "bold" }}>
                   {testCases[selectedTestCase].expected}
                 </span>
               </div>
+
+              {testCases[selectedTestCase].actual !== undefined && (
+                <div className="mb-1 text-sm">
+                  <span style={{ color: "#64748b" }}>Dit resultat: </span>
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      color:
+                        testCases[selectedTestCase].status === "pass"
+                          ? "#10b981"
+                          : "#ef4444",
+                    }}
+                  >
+                    {String(testCases[selectedTestCase].actual)}
+                  </span>
+                </div>
+              )}
+
+              {testCases[selectedTestCase].error && (
+                <div
+                  className="mt-2 p-2 rounded text-sm"
+                  style={{
+                    background: "#fff5f5",
+                    border: "1px solid #fca5a5",
+                    color: "#7f1d1d",
+                  }}
+                >
+                  <span style={{ fontWeight: "bold" }}>Fejl: </span>
+                  {translateError(testCases[selectedTestCase].error)}
+                </div>
+              )}
             </div>
           )}
         </div>

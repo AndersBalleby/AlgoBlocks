@@ -20,6 +20,7 @@ export default function TestCase({
   const statusClasses = {
     pass: "bg-[#f0fdf9] border-[#6ee7b7] text-[#065f46]",
     fail: "bg-[#fff5f5] border-[#fca5a5] text-[#7f1d1d]",
+    error: "bg-[#fff7ed] border-[#fdba74] text-[#7c2d12]",
     skipped:
       "opacity-40 cursor-default bg-[#f8fafc] border-[#e8ecf4] text-[#64748b]",
     default:
@@ -29,14 +30,27 @@ export default function TestCase({
   const bubbleClasses = {
     pass: "bg-[#10b981] text-white",
     fail: "bg-[#ef4444] text-white",
+    error: "bg-[#f97316] text-white",
     default: "bg-[#e2e8f0] text-[#64748b]",
   };
 
   const statusIconClasses = {
     pass: "text-[#10b981]",
     fail: "text-[#ef4444]",
+    error: "text-[#f97316]",
     default: "text-[#cbd5e1]",
   };
+
+  // And update the status icon
+  {
+    status === "pass"
+      ? "✓"
+      : status === "fail"
+        ? "✗"
+        : status === "error"
+          ? "!"
+          : "○";
+  }
 
   return (
     <div
