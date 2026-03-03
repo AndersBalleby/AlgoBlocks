@@ -1,8 +1,8 @@
 import { javascriptGenerator, Order } from "blockly/javascript";
 
 javascriptGenerator.forBlock["cb_math_number"] = function (block) {
-  const value = block.getFieldValue("NUM") || "0";
-  return [value, Order.ATOMIC];
+  const value = parseFloat(block.getFieldValue("NUM")) || "0";
+  return [String(value), Order.ATOMIC];
 };
 
 javascriptGenerator.forBlock["cb_math_arithmetic"] = function (

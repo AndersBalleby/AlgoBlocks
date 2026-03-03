@@ -1,6 +1,48 @@
 import { useEffect, useState } from "react";
 import TestCase from "./TestCase";
 
+function safeEval(code, timeoutMS = 3000) {
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(
+      URL.createObjectURL(
+        new Blob(
+          [
+            `
+          self.onmessage = function(e) {
+            try {
+              const result = eval(e.data);
+              self.postMessage({ result });
+            } catch(err) {
+              self.postMessage({ error: err.message }); 
+            }
+          }  
+        `,
+          ],
+          { type: "application/javascript" },
+        ),
+      ),
+    );
+
+    const timer = setTimeout(() => {
+      worker.terminate();
+      reject(
+        new Error(
+          "Koden brugte for lang tid - måske har du et uendeligt loop?",
+        ),
+      );
+    }, timeoutMS);
+
+    worker.onmessage = (e) => {
+      clearTimeout(timer);
+      worker.terminate();
+      if (e.data.error) reject(new Error(e.data.error));
+      else resolve(e.data.result);
+    };
+
+    worker.postMessage(code);
+  });
+}
+
 export default function TestCaseTab({
   isRunning,
   generatedCode,
@@ -61,9 +103,10 @@ export default function TestCaseTab({
               lineærSøgning([${array}], ${target});
             `;
 
-          result = eval(wrapped);
+          result = await safeEval(wrapped);
         } catch (e) {
           result = null;
+          console.warn(e.message);
         }
 
         const status = result === expected ? "pass" : "fail";
