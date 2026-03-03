@@ -44,7 +44,8 @@ export default function TestCaseTab({
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    if (!isRunning || !generatedCode) return;
+    if (!isRunning || !generatedCode || generatedCode === "Ingen kode endnu")
+      return;
 
     setTestCases((prev) => prev.map((tc) => ({ ...tc, status: "default" })));
 

@@ -15,6 +15,7 @@ export default function BlocklyWorkspace({
   isRunning,
   setIsRunning,
   onRun,
+  onCodeChange,
 }) {
   const blocklyDiv = useRef(null);
   const workspace = useRef(null);
@@ -61,6 +62,21 @@ export default function BlocklyWorkspace({
       onRun(code);
     }
   }, [isRunning]);
+
+  useEffect(() => {
+    if (!workspace.current) return;
+
+    const listener = () => {
+      const code = javascriptGenerator.workspaceToCode(workspace.current);
+      onCodeChange(code || "Ingen kode endnu");
+    };
+
+    workspace.current.addChangeListener(listener);
+
+    return () => {
+      workspace.current?.removeChangeListener(listener);
+    };
+  }, onCodeChange);
 
   return (
     <div

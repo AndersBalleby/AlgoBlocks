@@ -27,6 +27,10 @@ export default function App() {
     setActiveTab("solutionTab");
   }, []);
 
+  const handleCodeChange = useCallback(function (code) {
+    setGeneratedCode(code);
+  }, []);
+
   function onFinished() {
     setIsRunning(false);
   }
@@ -120,6 +124,7 @@ export default function App() {
               isRunning={isRunning}
               setIsRunning={setIsRunning}
               onRun={handleCodeGenerated}
+              onCodeChange={handleCodeChange}
             />
           </ErrorBoundary>
         </div>
