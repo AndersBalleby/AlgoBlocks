@@ -6,6 +6,7 @@ import ProblemTab from "./components/ProblemTab";
 import { linearSearchToolbox } from "./toolbox";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import UnsupportedScreen from "./components/UnsupportedScreen";
+import IntroModal from "./components/IntroModal";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("problemTab");
@@ -48,6 +49,7 @@ export default function App() {
 
   return (
     <>
+      <IntroModal />
       <div id="app">
         <div id="header">
           <h1>Workshop | Algoritmer</h1>

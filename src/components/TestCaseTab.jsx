@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import TestCase from "./TestCase";
 
 function safeEval(code, timeoutMS = 3000) {
@@ -64,8 +64,6 @@ export default function TestCaseTab({
   onFinished,
 }) {
   const [selectedTestCase, setSelectedTestCase] = useState(null);
-
-  /* Linear Search test cases */
   const [testCases, setTestCases] = useState([
     {
       array: [3, 7, 12, 18, 23, 31, 45],
@@ -94,8 +92,6 @@ export default function TestCaseTab({
     { array: [5], target: 5, expected: 0, status: "default" },
   ]);
 
-  /* For at afprøve test cases */
-  /* Det evaluerer ingen kode endnu :) */
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
@@ -248,10 +244,7 @@ export default function TestCaseTab({
         </div>
         <div id="codeTab" className="pt-5">
           <h3>Din Genererede Kode</h3>
-          <div className="pseudocodeContent">
-            {/* Ved ikke hvorfor den ikke viser det af default?? */}
-            {generatedCode ? generatedCode : "Ingen kode endnu"}
-          </div>
+          <div className="pseudocodeContent">{generatedCode}</div>
         </div>
       </section>
     </>
